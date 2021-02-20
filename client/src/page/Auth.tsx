@@ -2,20 +2,28 @@ import React from 'react';
 import { Button, Card, Container, Form, Row } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import { signUp, singIn } from '../api/auth';
+import jwtDecode from 'jwt-decode';
+import { Context } from '..';
+import { observer } from 'mobx-react-lite';
 
-export const Auth: React.FC = () => {
+export const Auth: React.FC = observer(() => {
   const location = useLocation();
   const isSignIn = location.pathname === '/signin';
   const [form, setForm] = React.useState<{password: string, email: string}>({
     email: '',
     password: ''
   });
+  const {user} = React.useContext(Context);
 
   const handleSignIn = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     let res;
     try {
       isSignIn ? res = await singIn({email: form.email, password: form.password}) : res = await signUp({email: form.email, password: form.password});
+      console.log(res);
+      window.localStorage.setItem('token', JSON.stringify(res.data));
+      user?.setUser(jwtDecode(res.data));
+      user?.setIsAuth(true);
     } catch (error) {
       console.log(error);
     }
@@ -47,4 +55,4 @@ export const Auth: React.FC = () => {
       </Card>
     </Container>
   )
-}
+})

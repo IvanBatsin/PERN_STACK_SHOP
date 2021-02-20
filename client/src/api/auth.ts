@@ -1,11 +1,5 @@
 import { axios } from '../core/axios';
-
-export interface User {
-  id: number
-  email: string,
-  password: string,
-  role: string
-}
+import { User } from '../interfaces/user';
 
 export interface ServerResponse<T> {
   status: 'error' | 'success',

@@ -1,11 +1,12 @@
 import { makeAutoObservable, action, computed } from 'mobx';
+import { User } from '../interfaces/user';
 
 export class UserStore {
   isAuth: boolean;
-  user: any;
+  user: User | undefined;
   constructor(){
     this.isAuth = false;
-    this.user = {};
+    this.user = undefined;
     makeAutoObservable(this);
   }
 
@@ -13,7 +14,7 @@ export class UserStore {
     this.isAuth = state;
   }
 
-  @action setUser(state: any): void {
+  @action setUser(state: User | undefined): void {
     this.user = state;
   }
 
