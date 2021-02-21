@@ -8,7 +8,7 @@ export const AppRouter: React.FC = () => {
   const {user} = React.useContext(Context);
   return (
     <Switch>
-      {!user?.isAuth && authRoutes.map(route => {
+      {user?.isAuth && authRoutes.map(route => {
         return <Route key={route.path} path={route.path} component={route.component} exact/>
       })}
       {publicRoutes.map(route => {

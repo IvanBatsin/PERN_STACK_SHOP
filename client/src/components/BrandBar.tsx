@@ -5,7 +5,6 @@ import { Context } from '..';
 
 export const BrandBar: React.FC = observer(() => {
   const {devices} = React.useContext(Context);
-  console.log(devices?.getSelectedBrand);
   return (
     <Row className="d-flex">
       {devices?.brands.map(brand => {

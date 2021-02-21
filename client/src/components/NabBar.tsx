@@ -10,6 +10,12 @@ import { RoutePaths } from '../interfaces/route';
 export const NavBar: React.FC = observer(() => {
   const {user} = React.useContext(Context);
   const history = useHistory();
+
+  const logOut = () => {
+    user?.setUser(undefined);
+    user?.setIsAuth(false);
+  }
+
   return (
     <Navbar bg="primary" variant="dark">
       <Container>
@@ -17,11 +23,11 @@ export const NavBar: React.FC = observer(() => {
         {user?.isAuth ?
           <Nav className="ml-auto">
             <Button style={{color:'white'}} onClick={() => history.push(RoutePaths.ADMIN)} variant='outline'>Admin panel</Button>
-            <Button style={{color:'white'}} onClick={() => history.push(RoutePaths.SIGNIN)} variant='outline'>Exit</Button>
+            <Button style={{color:'white'}} onClick={logOut} variant='outline'>Exit</Button>
           </Nav>
         :
           <Nav className="ml-auto">
-            <Button style={{color:'white'}} variant='outline' onClick={() => user?.setIsAuth(true)}>Authorization</Button>
+            <Button style={{color:'white'}} variant='outline' onClick={() => history.push(RoutePaths.SIGNIN)}>Authorization</Button>
           </Nav>
       }
       </Container>

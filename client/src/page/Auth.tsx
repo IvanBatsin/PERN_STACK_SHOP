@@ -1,13 +1,15 @@
 import React from 'react';
 import { Button, Card, Container, Form, Row } from 'react-bootstrap';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { signUp, singIn } from '../api/auth';
 import jwtDecode from 'jwt-decode';
 import { Context } from '..';
 import { observer } from 'mobx-react-lite';
+import { RoutePaths } from '../interfaces/route';
 
 export const Auth: React.FC = observer(() => {
   const location = useLocation();
+  const history = useHistory();
   const isSignIn = location.pathname === '/signin';
   const [form, setForm] = React.useState<{password: string, email: string}>({
     email: '',
@@ -20,12 +22,14 @@ export const Auth: React.FC = observer(() => {
     let res;
     try {
       isSignIn ? res = await singIn({email: form.email, password: form.password}) : res = await signUp({email: form.email, password: form.password});
-      console.log(res);
       window.localStorage.setItem('token', JSON.stringify(res.data));
       user?.setUser(jwtDecode(res.data));
       user?.setIsAuth(true);
+      setForm({email: '', password: ''});
+      history.push(RoutePaths.SHOP);
     } catch (error) {
       console.log(error);
+      window.alert(error.response.data.message);
     }
   }
 

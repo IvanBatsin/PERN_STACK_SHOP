@@ -13,25 +13,25 @@ export const brandValidatorCreate = [
 ];
 
 export const deviceValidatorCreate = [
-  // body('name', 'Name is required')
-  //   .isString().withMessage('Name format is invalid')
-  //   .notEmpty().withMessage('Name is required'),
+  body('name', 'Name is required')
+    .isString().withMessage('Name format is invalid')
+    .notEmpty().withMessage('Name is required'),
   
-  // body('price', 'Price is required')
-  //   .isNumeric().withMessage('Price formatt is invalid')
-  //   .notEmpty().withMessage('Price is required'),
+  body('price', 'Price is required')
+    .isString().withMessage('Price formatt is invalid')
+    .notEmpty().withMessage('Price is required'),
 
-  // body('brandId', 'BrandId is required')
-  //   .isNumeric().withMessage('BrandId formatt is invalid')
-  //   .notEmpty().withMessage('BrandId is required'),
+  body('brandId', 'BrandId is required')
+    .isString().withMessage('BrandId formatt is invalid')
+    .notEmpty().withMessage('BrandId is required'),
 
-  // body('typeId', 'TypeID is required')
-  //   .isNumeric().withMessage('TypeID formatt is invalid')
-  //   .notEmpty().withMessage('TypeID is required'),
+  body('categoryId', 'TypeID is required')
+    .isString().withMessage('TypeID formatt is invalid')
+    .notEmpty().withMessage('TypeID is required'),
 
-  // body('info', 'Info is required')
-  //   .isString().withMessage('Info format is invalid')
-  //   .notEmpty().withMessage('Info is required'),
+  body('info', 'Info is required')
+    .isString().withMessage('Info format is invalid')
+    .notEmpty().withMessage('Info is required')
 ];
 
 export const userSignUp = [

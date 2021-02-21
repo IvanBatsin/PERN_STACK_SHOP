@@ -7,25 +7,18 @@ export class DeviceStore {
   devices: IDevice[];
   selectedCategory: IBrandCategory | undefined;
   selectedBrand: IBrandCategory | undefined;
+  page: number;
+  pageCount: number;
+  devicesLimit: number;
+
   constructor(){
-    this.categories = [
-      {id: 1, name: 'fridge'},
-      {id: 2, name: 'smartphone'},
-      {id: 3, name: 'notebook'},
-      {id: 4, name: 'kitchen'},
-    ];
+    this.categories = [];
+    this.brands = [];
+    this.devices = [];
 
-    this.brands = [
-      {id: 1, name: 'Samsung'},
-      {id: 2, name: 'Apple'}
-    ];
-
-    this.devices = [
-      {id: 1, name: 'Iphone 12', rating: 5, price: 25000, img: 'https://33.img.avito.st/640x480/8025258733.jpg'},
-      {id: 2, name: 'Samsung A 20', rating: 5, price: 25000, img: 'https://33.img.avito.st/640x480/8025258733.jpg'},
-      {id: 3, name: 'Huawei P40', rating: 5, price: 25000, img: 'https://33.img.avito.st/640x480/8025258733.jpg'},
-      {id: 4, name: 'Meizu 12a', rating: 5, price: 25000, img: 'https://33.img.avito.st/640x480/8025258733.jpg'},
-    ];
+    this.page = 1;
+    this.pageCount = 0;
+    this.devicesLimit = 3;
 
     this.selectedCategory = undefined;
     this.selectedBrand = undefined;
@@ -48,6 +41,15 @@ export class DeviceStore {
   @action setSelectedBrand(brand: IBrandCategory): void {
     this.selectedBrand = brand;
   }
+  @action setPage(page: number): void {
+    this.page = page;
+  }
+  @action setPageCount(count: number): void {
+    this.pageCount = count;
+  }
+  @action setDevicesLimit(limit: number): void {
+    this.devicesLimit = limit;;
+  }
 
   @computed get getCategories(): IBrandCategory[] {
     return this.categories;
@@ -63,5 +65,14 @@ export class DeviceStore {
   }
   @computed get getSelectedBrand(): IBrandCategory | undefined {
     return this.selectedBrand;
+  }
+  @computed get getPage(): number {
+    return this.page;
+  }
+  @computed get getPageCount(): number {
+    return this.pageCount;
+  }
+  @computed get getDevicesLimit(): number {
+    return this.devicesLimit;
   }
 }

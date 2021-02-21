@@ -1,8 +1,17 @@
 import React from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
+import { createCategory } from '../../api/category';
 import { ModalProps } from '../../interfaces/modal';
 
+
 export const CategoryModal: React.FC<ModalProps> = ({show, onHide}: ModalProps) => {
+  const [name, setName] = React.useState<string>('');
+
+  const addCategory = () => {
+    createCategory({name});
+    setName('');
+    onHide();
+  }
   return (
     <Modal
       show={show}
@@ -18,11 +27,11 @@ export const CategoryModal: React.FC<ModalProps> = ({show, onHide}: ModalProps) 
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Control placeholder="Enter category name"/>
+          <Form.Control placeholder="Enter category name" value={name} onChange={event => setName(event.target.value)}/>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant='primary' onClick={onHide}>Add</Button>
+        <Button variant='primary' onClick={addCategory}>Add</Button>
         <Button variant='danger' onClick={onHide}>Close</Button>
       </Modal.Footer>
     </Modal>

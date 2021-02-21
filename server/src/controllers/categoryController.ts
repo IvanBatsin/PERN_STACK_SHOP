@@ -6,8 +6,8 @@ import { validationResult } from 'express-validator';
 class CategoryConstroller {
   getAll = async (req: Request, res: Response, next: NextFunction): Promise<void | NextFunction> => {
     try {
-      const types = await Category.findAll();
-      res.json({status: 'success', data: types});
+      const categories = await Category.findAll();
+      res.json({status: 'success', data: categories});
     } catch (error) {
       console.log(error);
     }
@@ -21,9 +21,9 @@ class CategoryConstroller {
       }
 
       const {name} = req.body;
-      const type = await Category.create({name});
+      const category = await Category.create({name});
 
-      res.json({status: 'success', data: type});
+      res.json({status: 'success', data: category});
     } catch (error) {
       console.log(error);
     }
